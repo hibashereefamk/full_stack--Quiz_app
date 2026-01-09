@@ -1,3 +1,3 @@
 from django.contrib import admin
-from .models import Question,Option,Category,Quiz,attempt
+from .models import Question,Option,Category,Quiz,Attempt
 
