@@ -25,7 +25,7 @@ class Category(models.Model):
 
 class Quiz(models.Model):
     title=models.CharField(max_length=200)
-    Category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
     created_by =models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
