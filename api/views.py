@@ -1,7 +1,7 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,BasePermission
 # Ensure these are imported correctly from your permissions file
-from .permission import IsTeacher, IsAdmin, IsStudent 
+from .permission import IsTeacher, IsAdmin
 
 from .models import Question, Quiz, QuizAttempt, Option, Category, CustomUser
 # FIX: Imported the correctly spelled serializers
@@ -12,7 +12,12 @@ from .serializers import (
     QuestionCreateUpdateSerializer, CategorySerializer,
     OptionCreateUpdateSerializer, CategoryCreateUpdateSerializer
 )
-
+class IsTeacherOrAdmin(BasePermission):
+    def has_permission(self, request, view):
+        if not request.user or not request.user.is_authenticated:
+            return False
+        # Check if role is Teacher OR Admin
+        return getattr(request.user, 'role', '') in ['Teacher', 'Admin']
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
 
@@ -24,7 +29,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
-        return [IsTeacher() | IsAdmin()]
+        return [IsTeacherOrAdmin()]
 
 class OptionViewset(viewsets.ModelViewSet):
     queryset = Option.objects.all()
@@ -39,7 +44,7 @@ class OptionViewset(viewsets.ModelViewSet):
         # FIX: Spelling of retrieve
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
-        return [IsAdmin() | IsTeacher()]
+        return [IsTeacherOrAdmin()]
 
 class CategoryViewset(viewsets.ModelViewSet):
     # FIX: QuerySet was Option, changed to Category
@@ -53,7 +58,7 @@ class CategoryViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
-        return [IsAdmin() | IsTeacher()]
+        return [IsTeacherOrAdmin()]
 
 class QuizViewset(viewsets.ModelViewSet):
     # FIX: QuerySet was Option, changed to Quiz
@@ -67,7 +72,7 @@ class QuizViewset(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
-        return [IsAdmin() | IsTeacher()]
+        return [IsTeacherOrAdmin()]
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
