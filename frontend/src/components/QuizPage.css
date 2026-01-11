@@ -1,0 +1,138 @@
+.quiz-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  padding-top: 100px; /* Space for Navbar */
+}
+
+/* Header & Timer */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.timer {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.timer.warning {
+  background: #ffebee;
+  color: #c62828;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #6200ea;
+  transition: width 0.3s ease;
+}
+
+/* Question Card */
+.question-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.question-count {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* Options */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-box {
+  padding: 15px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.option-box:hover {
+  background-color: #f5f5f5;
+  border-color: #bdbdbd;
+}
+
+.option-box.selected {
+  background-color: #ede7f6; /* Light Purple */
+  border-color: #6200ea;     /* Dark Purple */
+  color: #6200ea;
+  font-weight: 600;
+}
+
+/* Footer Buttons */
+.quiz-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nav-btn.prev {
+  background-color: #eeeeee;
+  color: #666;
+}
+
+.nav-btn.prev:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nav-btn.next {
+  background-color: #6200ea;
+  color: white;
+}
+
+.nav-btn.submit {
+  background-color: #2e7d32; /* Green */
+  color: white;
+}

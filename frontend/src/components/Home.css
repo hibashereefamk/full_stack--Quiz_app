@@ -1,0 +1,94 @@
+/* General Layout */
+
+.home-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-top: 80px; /* Add this! Pushes content down below navbar */
+}
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Grid Layout */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 60px 20px;
+}
+
+/* Category Card styling */
+.category-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(98, 0, 234, 0.15);
+  border-color: #6200ea;
+}
+
+.cat-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.category-card h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.category-card p {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.arrow-btn {
+  background-color: #f0f0f0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: #6200ea;
+  transition: background 0.3s;
+}
+
+.category-card:hover .arrow-btn {
+  background-color: #6200ea;
+  color: white;
+}
+
+/* Loading state */
+.loader {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 50px;
+}

@@ -1,0 +1,47 @@
+/* Navbar */
+.navbar {
+    height: 80px; 
+  width: 100%;
+  
+  /* If you want it to stay at the top while scrolling: */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6200ea;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logout-btn {
+  
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c62828;
+  color: white;
+}

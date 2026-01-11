@@ -1,9 +1,30 @@
 from rest_framework import serializers
-from .models import Question, Quiz, QuizAttempt, Option, Category, CustomUser
+from .models import Question, Quiz, QuizAttempt, Option, Category
+from django.contrib.auth import get_user_model
 
+User= get_user_model()
+class RegisterSerializer(serializers.ModelSerializer):
+    password= serializers.CharField(write_only =True,min_length =8)
+    class Meta:
+        model =User
+        fields =['username','password','email','name','phone_number','role']
+
+    def create(self,validated_data):
+            user=User.objects.create_user(
+
+            username=validated_data['username'],
+            password=validated_data['password'],
+            email=validated_data.get('email', ''),
+            name=validated_data.get('name', ''),
+            phone_number=validated_data.get('phone_number', ''),
+            role=validated_data.get('role', 'student')
+            )
+            return user
+        
+        
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['id', 'username', 'name', 'phone_number', 'role']
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -27,6 +48,16 @@ class OptionCreateUpdateSerializer(serializers.ModelSerializer):
         model = Option
         fields = ['id', 'question', 'text', 'is_correct']
 
+
+class QuizListSerializer(serializers.ModelSerializer):
+    questions_count = serializers.IntegerField(source='questions.count', read_only=True)
+
+    class Meta:
+        model = Quiz
+       
+        fields = ['id', 'title', 'level', 'questions_count', 'total_marks', 'time_limit']   
+
+        
 class QuestionSerializer(serializers.ModelSerializer):
     options = OptionSerializer(many=True, read_only=True)
     class Meta:
@@ -45,14 +76,14 @@ class QuizSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        fields = ['id', 'title', 'category', 'created_by', 'total_marks', 'time_limit', 'questions']
+        fields = ['id', 'title', 'category', 'created_by', 'total_marks', 'time_limit', 'questions','level']
 
-# FIX: Fixed spelling of Serializer
+
 class QuizCreatedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
-        # FIX: Checked field name consistency (total_marks)
-        fields = ['title', 'category', 'total_marks', 'time_limit']
+       
+        fields = ['title', 'category','level', 'total_marks', 'time_limit']
 
     def create(self, validated_data):
         validated_data['created_by'] = self.context['request'].user

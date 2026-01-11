@@ -31,6 +31,7 @@ class Quiz(models.Model):
         on_delete=models.CASCADE,
         limit_choices_to={'role':'teacher'}
     )
+    level=models.CharField(max_length=20,default='Medium')
     total_marks =models.IntegerField()
     time_limit=models.IntegerField(help_text="Time in minutes")
 
@@ -47,7 +48,7 @@ class Question(models.Model):
         return self.text
 
 class Option(models.Model):
-    question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='option')
+    question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='options')
     text = models.CharField(max_length=255)
     is_correct = models.BooleanField(default=False)
 
