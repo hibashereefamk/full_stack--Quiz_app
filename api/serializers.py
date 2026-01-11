@@ -32,7 +32,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name']
 
-# FIX: Added (serializers.ModelSerializer)
 class CategoryCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category

@@ -55,19 +55,18 @@ class OptionViewset(viewsets.ModelViewSet):
     queryset = Option.objects.all()
 
     def get_serializer_class(self):
-        # FIX: Spelling of partial_update
         if self.action in ['create', 'update', 'partial_update']:
             return OptionCreateUpdateSerializer
         return OptionSerializer
 
     def get_permissions(self):
-        # FIX: Spelling of retrieve
+       
         if self.action in ['list', 'retrieve']:
             return [IsAuthenticated()]
         return [IsTeacherOrAdmin()]
 
 class CategoryViewset(viewsets.ModelViewSet):
-    # FIX: QuerySet was Option, changed to Category
+    
     queryset = Category.objects.all()
 
     def get_serializer_class(self):
@@ -82,7 +81,7 @@ class CategoryViewset(viewsets.ModelViewSet):
 
 
 class QuizViewset(viewsets.ModelViewSet):
-    # FIX: QuerySet was Option, changed to Quiz
+    
     queryset = Quiz.objects.all()
 
     def get_serializer_class(self):
@@ -93,9 +92,10 @@ class QuizViewset(viewsets.ModelViewSet):
         return QuizSerializer
 
     def get_permissions(self):
-        if self.action in ['list', 'retrieve']:
-            return [AllowAny()]
+        if self.action in ['list', 'retrieve','list_by_category']:
+            return [IsAuthenticated()]
         return [IsTeacherOrAdmin()]
+    
     @action(detail=False,methods=['get'],url_path='category/(?P<category_id>\d+)')
     def list_by_category(self,request, category_id=None):
        quizzes = self.queryset.filter(category__id=category_id) 
