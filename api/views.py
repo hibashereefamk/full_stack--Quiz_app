@@ -29,9 +29,9 @@ class IsTeacherOrAdmin(BasePermission):
 
 
 class RegisterView(generics.CreateAPIView):
-    Queryset =User.objects.all()
-    permission_class=[AllowAny]
-    serializer_class=RegisterSerializer
+    queryset = User.objects.all()           # Lowercase 'q'
+    permission_classes = [AllowAny]         # Plural 'classes'
+    serializer_class = RegisterSerializer
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
